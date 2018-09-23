@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_bright"
+    tools:context="com.example.rohithkumar.cameramapsapplication.MainActivity">
+
+    <Button
+        android:id="@+id/main_btn_record"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="162dp"
+        android:background="@android:color/holo_blue_dark"
+        android:onClick="onLocationClick"
+        android:text="Display Location"></Button>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="352dp"
+        android:layout_height="285dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        app:srcCompat="@drawable/track" />
+
+</RelativeLayout>
