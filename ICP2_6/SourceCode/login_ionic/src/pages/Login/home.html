@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form action="/action_page.php">
+    <input type="text" placeholder="Username">
+    <br>
+    <input type="password"  placeholder="Password" required>
+    <br><br>
+    <input type="submit" value="Login">
+    <input type="submit" value="New User?" (click)="newUser()">
+  </form>
+</ion-content>
