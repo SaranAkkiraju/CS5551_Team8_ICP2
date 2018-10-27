@@ -1,36 +1,29 @@
-/**
- * Created by Marmik on 04/10/2016.*/
-var http = require('http');
-var fs = require("fs");
-var url = require('url');
-// Create a server
-http.createServer( function (request, response) {  
-   // Parse the request containing file name
-   var pathname = url.parse(request.url).pathname;
-   
-   // Print the name of the file for which request is made.
-   console.log("Request for " + pathname + " received.");
-   
-   // Read the requested file content from file system
-   fs.readFile(pathname.substr(1), function (err, data) {
-      if (err) {
-         console.log(err);
-         // HTTP Status: 404 : NOT FOUND
-         // Content Type: text/plain
-         response.writeHead(404, {'Content-Type': 'text/html'});
-      }else {	
-         //Page found	  
-         // HTTP Status: 200 : OK
-         // Content Type: text/plain
-         response.writeHead(200, {'Content-Type': 'text/html'});	
-         
-         // Write the content of the file to response body
-         response.write(data.toString());		
-      }
-      // Send the response body 
-      response.end();
-   });   
-}).listen(8081);
+var bodyParser = require("body-parser");
+var express = require('express');
+var cors = require('cors');
+var request= require('request-json');
+var app = express();
 
-// Console will print the message
-console.log('Client Server running at http://127.0.0.1:8081/');
+
+var client = request.createClient('http://127.0.0.1:8080/');
+
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+app.get('/getData', function (req, res) {
+    var searchKeyword = req.query.searchkey;
+    client.get("https://kgsearch.googleapis.com/v1/entities:search?query="+searchKeyword+"&key=AIzaSyCZbMz2VUDfsNIawl7W9W64FpZp8gsoh10&limit=1&indent=True", function (error, response, body) {
+        res.send(body);
+    });
+
+});
+
+var server = app.listen(8080,function () {
+    var host = server.address().address
+    console.log("host value"+host);
+    var port = server.address().port
+
+    console.log("Example app listening at http://%s:%s", host, port)
+})
